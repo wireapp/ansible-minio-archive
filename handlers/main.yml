@@ -1,6 +1,12 @@
 ---
 
-- name: restart minio
+# FIXME: make these parametric.
+- name: restart "minio-server1"
   service:
-    name: minio
+    name: minio-server1
+    state: restarted
+
+- name: restart "minio-server2"
+  service:
+    name: minio-server2
     state: restarted
