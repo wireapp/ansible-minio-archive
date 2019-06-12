@@ -19,13 +19,9 @@
 # get_url module in server.yml and client.yml.
 - name: install the Python SNI python-pip dependencies.
   pip:
-    name: "{{ item }}"
+    name: "['pyopenssl', 'ndg-httpsclient', 'pyasn1']"
     state: present
   register: _install_pip_packages
   until: _install_pip_packages is succeeded
   retries: 5
   delay: 2
-  with_items:
-    - pyopenssl
-    - ndg-httpsclient
-    - pyasn1
