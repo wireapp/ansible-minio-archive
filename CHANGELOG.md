@@ -4,8 +4,38 @@
 
 **Implemented enhancements:**
 
+- Secure user [\#15](https://github.com/atosatto/ansible-minio/issues/15)
+
+**Closed issues:**
+
+- Why systemd Restart=on-success rule ? [\#35](https://github.com/atosatto/ansible-minio/issues/35)
+- Fails to run from master branch [\#22](https://github.com/atosatto/ansible-minio/issues/22)
+
+**Merged pull requests:**
+
+- Change minio user to system user [\#41](https://github.com/atosatto/ansible-minio/pull/41) ([drakmail](https://github.com/drakmail))
+- Restart minio service on binary or service config update [\#38](https://github.com/atosatto/ansible-minio/pull/38) ([sberthier](https://github.com/sberthier))
+- Fix ansible-lint error on double quote [\#37](https://github.com/atosatto/ansible-minio/pull/37) ([sberthier](https://github.com/sberthier))
+- Systemd service: Restart=always [\#36](https://github.com/atosatto/ansible-minio/pull/36) ([sberthier](https://github.com/sberthier))
+- Fix Travis errors. [\#33](https://github.com/atosatto/ansible-minio/pull/33) ([SuperQ](https://github.com/SuperQ))
+- Simplify go\_arch setup [\#32](https://github.com/atosatto/ansible-minio/pull/32) ([SuperQ](https://github.com/SuperQ))
+- Convert template comments [\#31](https://github.com/atosatto/ansible-minio/pull/31) ([SuperQ](https://github.com/SuperQ))
+- Add 'minio\_server\_release' and 'minio\_client\_release' variables. [\#29](https://github.com/atosatto/ansible-minio/pull/29) ([sberthier](https://github.com/sberthier))
+- Add become: yes to playbook example [\#27](https://github.com/atosatto/ansible-minio/pull/27) ([till](https://github.com/till))
+
+## [v1.1.0](https://galaxy.ansible.com/atosatto/minio) (2018-08-20)
+**Implemented enhancements:**
+
 - Allow minio to bind to lower ports [\#13](https://github.com/atosatto/ansible-minio/issues/13)
 - Add OS/arch support matrix [\#9](https://github.com/atosatto/ansible-minio/issues/9)
+- Improved tasks and tests layout [\#25](https://github.com/atosatto/ansible-minio/pull/25) ([atosatto](https://github.com/atosatto))
+- Set a default value for the 'minio\_server\_datadirs' variable [\#24](https://github.com/atosatto/ansible-minio/pull/24) ([atosatto](https://github.com/atosatto))
+- Allow to inject additional Minio server environment variables [\#23](https://github.com/atosatto/ansible-minio/pull/23) ([atosatto](https://github.com/atosatto))
+- Add option to create minio clusters [\#19](https://github.com/atosatto/ansible-minio/pull/19) ([SuperQ](https://github.com/SuperQ))
+
+**Fixed bugs:**
+
+- Pin the version of ferrarimarco/github-changelog-generator to prevent the CI from hanging [\#26](https://github.com/atosatto/ansible-minio/pull/26) ([atosatto](https://github.com/atosatto))
 
 **Closed issues:**
 
@@ -13,11 +43,6 @@
 
 **Merged pull requests:**
 
-- Pin the version of ferrarimarco/github-changelog-generator to prevent the CI from hanging [\#26](https://github.com/atosatto/ansible-minio/pull/26) ([atosatto](https://github.com/atosatto))
-- Improved tasks and tests layout [\#25](https://github.com/atosatto/ansible-minio/pull/25) ([atosatto](https://github.com/atosatto))
-- Set a default value for the 'minio\_server\_datadirs' variable [\#24](https://github.com/atosatto/ansible-minio/pull/24) ([atosatto](https://github.com/atosatto))
-- Allow to inject additional Minio server environment variables [\#23](https://github.com/atosatto/ansible-minio/pull/23) ([atosatto](https://github.com/atosatto))
-- Add option to create minio clusters [\#19](https://github.com/atosatto/ansible-minio/pull/19) ([SuperQ](https://github.com/SuperQ))
 - checksum validation [\#18](https://github.com/atosatto/ansible-minio/pull/18) ([paulfantom](https://github.com/paulfantom))
 - Add fedora to supported platforms [\#17](https://github.com/atosatto/ansible-minio/pull/17) ([paulfantom](https://github.com/paulfantom))
 - Update systemd service file [\#16](https://github.com/atosatto/ansible-minio/pull/16) ([paulfantom](https://github.com/paulfantom))

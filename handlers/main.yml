@@ -1,12 +1,11 @@
 ---
 
-# FIXME: make these parametric.
-- name: restart "minio-server1"
-  service:
-    name: minio-server1
-    state: restarted
+- name: reload minio systemd
+  systemd:
+    name: "{{ layouts[layout]['servicename'] }}"
+    daemon_reload: True
 
-- name: restart "minio-server2"
+- name: restart minio
   service:
-    name: minio-server2
+    name: "{{ layouts[layout]['servicename'] }}"
     state: restarted

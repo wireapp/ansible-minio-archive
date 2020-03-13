@@ -9,8 +9,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 @pytest.fixture()
-def AnsibleDefaults(Ansible):
-    with open("../../defaults/main.yml", 'r') as stream:
+def AnsibleDefaults():
+    with open('../../defaults/main.yml', 'r') as stream:
         return yaml.load(stream)
 
 
@@ -40,4 +40,4 @@ def test_minio_server_data_directories(host, AnsibleDefaults):
 
 def test_minio_server_webserver(host):
 
-    host.socket("tcp://127.0.0.1:9091").is_listening
+    host.socket('tcp://127.0.0.1:9091').is_listening

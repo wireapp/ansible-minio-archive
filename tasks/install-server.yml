@@ -1,10 +1,19 @@
 ---
-
-- name: Compose the Minio server download url
+- name: Compose the Minio server download base url
   set_fact:
-    _minio_server_download_url: "https://dl.minio.io/server/minio/release/linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/minio"
+    _minio_server_download_base_url: "https://dl.minio.io/server/minio/release/linux-{{ go_arch }}"
 
-- name: "Get the Minio server checksum for {{ go_arch_map[ansible_architecture] | default(ansible_architecture) }} architecture"
+- name: Compose the Minio server download url with lastest release
+  set_fact:
+    _minio_server_download_url: "{{ _minio_server_download_base_url }}/minio"
+  when: minio_server_release | length == 0
+
+- name: "Compose the Minio server download url with release {{ minio_server_release }}"
+  set_fact:
+    _minio_server_download_url: "{{ _minio_server_download_base_url }}/archive/minio.{{ minio_server_release }}"
+  when: minio_server_release | length > 0
+
+- name: "Get the Minio server checksum for {{ go_arch }} architecture"
   set_fact:
     _minio_server_checksum: "{{ lookup('url', _minio_server_download_url + '.sha256sum').split(' ')[0] }}"
 
@@ -17,11 +26,14 @@
   user:
     name: "{{ minio_user }}"
     group: "{{ minio_group }}"
-    shell: /bin/bash
+    system: "yes"
+    shell: "/usr/sbin/nologin"
+
 
 - name: layout dump
   debug:
     msg: "using layout {{ layout }}."
+
 
 - name: Create the Minio data storage directories
   file:
@@ -45,6 +57,7 @@
   until: _download_server is succeeded
   retries: 5
   delay: 2
+  notify: restart minio
 
 
 - name: Identify all of the cluster members
@@ -52,9 +65,10 @@
     minio_cluster_nodes: >-
       {% for layout in layouts %}{% for host in groups["minio"] %}http://{{ hostvars[host]['ansible_' + minio_network_interface]['ipv4']['address'] }}{{ layouts[layout]['minio_server_addr'] }}{{layouts[layout]['minio_server_datadirs']}} {% endfor %}{% endfor %}
 
-- name: layout dump
+- name: cluster dump
   debug:
     msg: "using cluster map {{ minio_cluster_nodes }}."
+
 
 - name: Generate the Minio server envfile
   template:
@@ -63,7 +77,7 @@
     owner: "root"
     group: "{{ minio_group }}"
     mode: 0640
-  notify: restart "{{ layouts[layout]['servicename'] }}"
+  notify: restart minio
 
 - name: Create the Minio server systemd config
   template:
@@ -72,6 +86,9 @@
     owner: "root"
     group: "root"
   when: ansible_service_mgr == "systemd"
+  notify:
+    - reload minio systemd
+    - restart minio
 
 - name: Create the Minio server init.d config
   template:
@@ -81,6 +98,7 @@
     group: "root"
     mode: 0750
   when: ansible_service_mgr != "systemd"
+  notify: restart minio
 
 - name: Enable and start the Minio service
   service:
