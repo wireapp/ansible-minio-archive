@@ -4,8 +4,12 @@
   systemd:
     name: "{{ layouts[layout]['servicename'] }}"
     daemon_reload: True
+  tags:
+    - install
 
 - name: restart minio
   service:
     name: "{{ layouts[layout]['servicename'] }}"
     state: restarted
+  tags:
+    - install
