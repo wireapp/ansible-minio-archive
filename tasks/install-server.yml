@@ -55,7 +55,7 @@
 
 - name: layout dump
   debug:
-    msg: "using layout {{ layout }}."
+    msg: "using layout {{ layouts }}."
   tags:
     - install
 
@@ -99,6 +99,7 @@
     minio_cluster_nodes: >-
       {% for layout in layouts %}
         {% for host in groups["minio"] %}
+        {{
           [
             'http://',
             hostvars[host]['ansible_' + minio_network_interface]['ipv4']['address'],
@@ -106,6 +107,7 @@
             layouts[layout]['minio_server_datadirs'],
             ' '
           ] | join('')
+        }}
         {% endfor %}
       {% endfor %}
   tags:
