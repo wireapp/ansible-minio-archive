@@ -17,7 +17,7 @@ env:
 
 # Install tox
 install:
-  - pip install tox-travis git-semver
+  - pip install tox-travis git-semver==0.3.1
 
 # Execute tests
 script:
