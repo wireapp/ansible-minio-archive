@@ -19,3 +19,6 @@ rules:
   brackets:
     min-spaces-inside-empty: 0
     max-spaces-inside-empty: 1
+
+  comments: disable
+  comments-indentation: disable
