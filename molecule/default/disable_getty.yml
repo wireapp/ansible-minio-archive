@@ -5,4 +5,4 @@
     enabled: false
     masked: true
     state: stopped
-  with_items: [ tty1, tty2, tty3, tty4, tty5, tty6 ]
+  with_items: [tty1, tty2, tty3, tty4, tty5, tty6]
