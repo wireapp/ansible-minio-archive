@@ -1,6 +1,6 @@
 ---
 language: python
-python: "2.7"
+python: "3.7"
 cache: pip
 
 # Use the new container infrastructure
@@ -12,9 +12,7 @@ services:
 
 env:
   matrix:
-    - ANSIBLE=2.4
-    - ANSIBLE=2.5
-    - ANSIBLE=2.6
+    - ANSIBLE=2.9
 
 # Install tox
 install:
